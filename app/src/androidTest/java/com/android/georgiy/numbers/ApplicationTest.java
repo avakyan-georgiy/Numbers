@@ -1,4 +1,4 @@
-package com.mum.georgiy.numbers;
+package com.android.georgiy.numbers;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

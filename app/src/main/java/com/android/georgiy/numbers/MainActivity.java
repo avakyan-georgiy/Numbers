@@ -1,4 +1,4 @@
-package com.mum.georgiy.numbers;
+package com.android.georgiy.numbers;
 
 import android.content.Context;
 import android.graphics.Color;
