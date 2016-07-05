@@ -162,17 +162,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         startGame.setOnClickListener(startGameListener);
-
-
-      /*  answer.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    checkAnswer(null);
-                    return true;
-                }
-                return false;
-            }
-        });*/
     }
 
     public void performRbClick() {
