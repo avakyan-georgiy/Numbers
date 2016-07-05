@@ -11,7 +11,6 @@ import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -32,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     public EditText ct_timer;
     public int btncase;
     public int tmp = 4000;
+    public int correct_answer = 0;
+    public int incorrect_answer = 0;
     public OnClickListener radioListener;
     public OnClickListener startGameListener;
     public View.OnKeyListener enterListener;
@@ -94,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
         answer.requestFocus();
 
         enterListener = new View.OnKeyListener() {
-            int correct_answer = 0;
-            int incorrect_answer = 0;
-
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     if ((correct_answer + incorrect_answer) < 9) {
@@ -151,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
         startGameListener = new OnClickListener() {
             @Override
             public void onClick(View v) {
+                correct_answer = 0;
+                incorrect_answer = 0;
                 counter.setText(String.valueOf(10));
                 performRbClick();
                 mChronometer.setVisibility(View.VISIBLE);
@@ -258,7 +258,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void hideKeyboard() {
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromInputMethod(null, InputMethodManager.SHOW_IMPLICIT);
     }
 
     public boolean checkAnswer(View view) {
@@ -286,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void writeRes() {
         answer.setEnabled(false);
+        answer.setFocusable(false);
         int greencolor = Color.GREEN;
         int redcolor = Color.RED;
         if (checkAnswer(null)) {
@@ -293,15 +296,40 @@ public class MainActivity extends AppCompatActivity {
             result.setTextColor(greencolor);
             result.setTypeface(null, Typeface.BOLD);
             checkTimer();
-            showKeyboard(answer);
-            answer.setEnabled(true);
+            new CountDownTimer(tmp, 1000) {
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    answer.setEnabled(true);
+                    answer.setFocusableInTouchMode(true);
+                    answer.requestFocus();
+                    showKeyboard(answer);
+                }
+            }.start();
+
         } else if (!checkAnswer(null)) {
             result.setText("Мимо");
             result.setTextColor(redcolor);
             result.setTypeface(null, Typeface.BOLD);
             checkTimer();
-            showKeyboard(answer);
-            answer.setEnabled(true);
+            new CountDownTimer(tmp, 1000) {
+                @Override
+                public void onTick(long l) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    answer.setEnabled(true);
+                    answer.setFocusableInTouchMode(true);
+                    answer.requestFocus();
+                    showKeyboard(answer);
+                }
+            }.start();
         }
     }
 }
