@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 counter.setText(String.valueOf(10));
                 performRbClick();
+                mChronometer.setVisibility(View.VISIBLE);
                 mChronometer.setBase(SystemClock.elapsedRealtime());
                 mChronometer.start();
                 timer.setText("");

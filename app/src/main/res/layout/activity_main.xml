@@ -168,9 +168,9 @@
             android:layout_alignEnd="@+id/chronometer"
             android:layout_alignRight="@+id/chronometer"
             android:layout_alignTop="@+id/counter_textView"
-            android:layout_toEndOf="@+id/nums_textView"
-            android:layout_toRightOf="@+id/nums_textView"
-            android:gravity="center"
+            android:layout_toEndOf="@+id/counter_textView"
+            android:layout_toRightOf="@+id/counter_textView"
+            android:gravity="end|right"
             android:textColor="#000000"
             android:textSize="40sp" />
 
