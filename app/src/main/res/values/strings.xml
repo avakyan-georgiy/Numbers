@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Numbers</string>
-    <string name="timer_text">Таймер, с</string>
+    <string name="timer_text">Шаг, с</string>
     <string name="first_rb">1 x 2</string>
     <string name="second_rb">2 x 2</string>
     <string name="third_rb">1 x 3</string>

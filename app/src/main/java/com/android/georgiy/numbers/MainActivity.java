@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     if ((correct_answer + incorrect_answer) < 9) {
                         writeRes();
+                        ct_timer.setEnabled(false);
+                        ct_timer.setFocusable(false);
                         if ((checkAnswer(null)) && (checkAnswerLength())) {
                             correct_answer++;
                             counter.setText(String.valueOf(10 - (correct_answer + incorrect_answer)));
@@ -113,16 +115,17 @@ public class MainActivity extends AppCompatActivity {
                         writeRes();
                         if (checkAnswer(null)) {
                             correct_answer++;
-                            String countertext = String.valueOf(Html.fromHtml("<font color=#00ff00>" + String.valueOf(correct_answer) + "</font>:<font color=#ff0000>" + String.valueOf(incorrect_answer) + "</font>"));
-                            counter.setText(countertext);
+                            counter.setText(Html.fromHtml("<font color=#00ff00>" + String.valueOf(correct_answer) + "</font>:<font color=#ff0000>" + String.valueOf(incorrect_answer) + "</font>"));
                             Toast.makeText(getApplicationContext(), "Game finished!", Toast.LENGTH_LONG).show();
                             correct_answer = 0;
                             incorrect_answer = 0;
                             mChronometer.stop();
-                            String timertext = String.valueOf((SystemClock.elapsedRealtime()
-                                    - mChronometer.getBase()) / 1000 - (tmp * 10)) + "с, t = " + tmp / 1000;
+                            String timertext = String.valueOf(((SystemClock.elapsedRealtime()
+                                    - mChronometer.getBase()) / 1000) - (tmp * 10)) + "с, t = " + tmp / 1000;
                             timer.setText(timertext);
                             mChronometer.setVisibility(View.GONE);
+                            ct_timer.setEnabled(true);
+                            ct_timer.setFocusableInTouchMode(true);
                             hideKeyboard();
                         } else if (!checkAnswer(null)) {
                             incorrect_answer++;
@@ -135,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                                     - mChronometer.getBase()) / 1000) - (tmp / 100)) + "с, t = " + tmp / 1000;
                             timer.setText(timertext);
                             mChronometer.setVisibility(View.GONE);
+                            ct_timer.setEnabled(true);
+                            ct_timer.setFocusableInTouchMode(true);
                             hideKeyboard();
                         }
                         hideKeyboard();
